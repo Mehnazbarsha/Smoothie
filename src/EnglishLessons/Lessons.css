@@ -1,291 +1,96 @@
-/* ===== Lesson Container and Buttons ===== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #DA74A3;
+  --primary-light: #E9ACC8;
+  --primary-dark: #C95B8D;
+  --secondary: #94B2ED;
+  --accent-green: #4CAF50;
+  --accent-red: #F44336;
+  --accent-yellow: #F4D77A;
+  --accent-orange: #F8B553;
+  --surface: #FFFFFF;
+  --text-primary: #3A2A3E;
+  --text-secondary: #6B7280;
+  --border-light: #E5E7EB;
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+/* ===== Lesson Container ===== */
 .lesson-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
-  padding-top: 130px;
-}
-
-.lesson-container h1 {
-  font-size: 22px;
-  font-weight: 400;
-  color: #333333;
-  margin-bottom: -20px;
-  margin-top: -110px;
-}
-
-.option-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: -20px;
-}
-
-.option-buttons button {
-  background-color: #ffa6a6;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 600;
-  padding: 15px 30px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  width: 300px;
-}
-
-.option-buttons button.selected {
-  background-color: #ff7f7f;
-}
-
-.option-buttons button:hover {
-  background-color: #ff7f7f;
-}
-
-.check-button,
-.continue-button {
-  background-color: #ffa6a6;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 600;
-  padding: 12px 24px;
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
-}
-
-.check-button:hover,
-.continue-button:hover {
-  background-color: #ff7f7f;
-}
-
-/* ===== Circular Progress Bar Styles ===== */
-.progress-container {
-  position: absolute;
-  top: 150px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.progress-circle {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.progress-ring {
-  width: 120px;
-  height: 120px;
-  transform: rotate(-90deg);
-}
-
-.progress-ring-circle-bg {
-  stroke: #ddd;
-  stroke-width: 8;
-  fill: transparent;
-  opacity: 0.3;
-}
-
-.progress-ring-circle {
-  stroke: #ff7f7f;
-  stroke-width: 8;
-  fill: transparent;
-  transition: stroke-dashoffset 0.4s ease;
-}
-
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 22px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* ===== Toast-style Notification Styles ===== */
-.toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.toast {
-  display: flex;
-  align-items: center;
-  min-width: 300px;
-  max-width: 400px;
-  padding: 16px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  color: white;
-  position: relative;
-  pointer-events: auto;
-  transform: translateX(120%);
-  transition: transform 0.3s ease;
-  overflow: hidden;
-}
-
-.toast.show {
-  transform: translateX(0);
-}
-
-.toast-content {
-  flex-grow: 1;
-}
-
-.toast-close {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 4px 8px;
-  margin-left: 12px;
-  font-weight: bold;
-}
-
-.toast-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: rgba(255,255,255,0.4);
-  transform-origin: left;
-  animation-fill-mode: forwards;
-}
-
-.toast.success {
-  background-color: #4caf50;
-}
-
-.toast.error {
-  background-color: #f44336;
-}
-
-@keyframes progress-shrink {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-}
-
-.toast-top-right {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-}
-
-/* ===== Lesson Complete Modal ===== */
-.lesson-complete-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white; /* Changed to white from gray */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  animation: fadeIn 0.3s ease-out;
-}
-
-/* Hide back-from-lessons button whenever overlay is active */
-.lesson-complete-overlay button.back-from-lessons {
-  display: none !important;
-}
-
-.lesson-complete-modal {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  animation: slideUp 0.4s ease-out;
-  position: relative;
-  z-index: 10001;
-}
-
-.lesson-result-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 2rem;
-}
-
-.lesson-result-icon.success {
-  background-color: #10b981;
-  color: white;
-}
-
-.lesson-result-icon.failed {
-  background-color: #ef4444;
-  color: white;
-}
-
-.lesson-result-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0 0 1rem 0;
-  color: #1f2937;
-}
-
-.lesson-result-message {
-  color: #6b7280;
-  margin: 0 0 2rem 0;
-  line-height: 1.5;
-}
-
-.lesson-complete-button {
-  background-color: #ffa6a6;
-  color: white;
-  border: none;
-  padding: 0.875rem 2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.lesson-complete-button:hover {
-  background-color: #ff7f7f;
-  transform: translateY(-1px);
-}
-
-.lesson-complete-button:active {
-  transform: translateY(0);
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #FFF5F8 0%, #F0F4FF 100%);
+  animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.lesson-container h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 48px;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+  animation: slideDown 0.5s ease-out 0.1s both;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Options ===== */
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.option-buttons button {
+  background: var(--surface);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 20px 32px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.4s ease-out both;
+}
+
+.option-buttons button:nth-child(1) { animation-delay: 0.2s; }
+.option-buttons button:nth-child(2) { animation-delay: 0.3s; }
+.option-buttons button:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes slideUp {
   from {
@@ -298,26 +103,351 @@
   }
 }
 
-/* ===== Responsive Modal for Smaller Devices ===== */
-@media (max-width: 480px) {
-  .lesson-complete-modal {
-    padding: 1.5rem;
-    margin: 1rem;
+.option-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(218, 116, 163, 0.05) 0%, rgba(148, 178, 237, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.option-buttons button:hover::before {
+  opacity: 1;
+}
+
+.option-buttons button:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.option-buttons button.selected {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(218, 116, 163, 0.3);
+}
+
+.option-buttons button:disabled {
+  background: var(--border-light);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== Check & Continue Buttons ===== */
+.check-button,
+.continue-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 40px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 10;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInRight 0.4s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.check-button:hover,
+.continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(218, 116, 163, 0.4);
+}
+
+/* ===== Progress Circle ===== */
+.progress-container {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.progress-circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.progress-ring {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.progress-ring-circle-bg {
+  stroke: var(--border-light);
+  stroke-width: 10;
+  fill: transparent;
+}
+
+.progress-ring-circle {
+  stroke: url(#progressGradient);
+  stroke-width: 10;
+  fill: transparent;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  stroke-linecap: round;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===== Toast Notifications ===== */
+.toast {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  min-width: 320px;
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  animation: toastSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast.success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #F44336 0%, #E53935 100%);
+}
+
+.toast.show {
+  display: flex;
+}
+
+.toast-content {
+  flex-grow: 1;
+}
+
+.toast-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ===== Lesson Complete Modal ===== */
+.lesson-complete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 245, 248, 0.98) 0%, rgba(240, 244, 255, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.lesson-complete-modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  border: 1px solid var(--border-light);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lesson-result-icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 48px;
+  box-shadow: var(--shadow-md);
+}
+
+.lesson-result-icon.success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+  color: white;
+}
+
+.lesson-result-icon.failed {
+  background: linear-gradient(135deg, #F44336 0%, #E53935 100%);
+  color: white;
+}
+
+.lesson-result-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: var(--text-primary);
+}
+
+.lesson-result-message {
+  color: var(--text-secondary);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.lesson-complete-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lesson-complete-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.lesson-complete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.lesson-complete-button.retry-button {
+  background: var(--surface);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.lesson-complete-button.retry-button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .lesson-container h1 {
+    font-size: 22px;
+    margin-bottom: 32px;
   }
   
-  .lesson-result-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+  .option-buttons {
+    max-width: 100%;
+  }
+  
+  .option-buttons button {
+    font-size: 16px;
+    padding: 16px 24px;
+  }
+  
+  .check-button,
+  .continue-button {
+    bottom: 20px;
+    right: 20px;
+    padding: 14px 32px;
+    font-size: 16px;
+  }
+  
+  .progress-container {
+    top: 20px;
+  }
+  
+  .toast {
+    top: 20px;
+    right: 20px;
+    min-width: 280px;
+  }
+  
+  .lesson-complete-modal {
+    padding: 32px 24px;
   }
   
   .lesson-result-title {
-    font-size: 1.25rem;
+    font-size: 24px;
   }
 }
 
-/* Hide the back-from-lessons button sitewide during lesson */
+/* Hide back button during lesson */
 body.hide-back-button button.back-from-lessons {
   display: none !important;
 }
-

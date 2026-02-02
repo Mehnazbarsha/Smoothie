@@ -1,4 +1,5 @@
-/* Load the Britney Variable font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
 @font-face {
   font-family: "Britney";
   src: url("../Fonts/Britney.ttf") format("truetype");
@@ -6,7 +7,25 @@
   font-style: normal;
 }
 
-/* Apply the font to body and .title */
+:root {
+  --primary: #DA74A3;
+  --primary-light: #E9ACC8;
+  --primary-dark: #C95B8D;
+  --secondary: #94B2ED;
+  --accent-yellow: #F4D77A;
+  --accent-orange: #F8B553;
+  --accent-coral: #DAE097;
+  --accent-purple: #6D3A52;
+  --surface: #FFFFFF;
+  --text-primary: #3A2A3E;
+  --text-secondary: #6B7280;
+  --border-light: #E5E7EB;
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -15,119 +34,230 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  font-family: "Britney Variable", Arial, sans-serif;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #FFF5F8 0%, #F0F4FF 100%);
+}
+
+.login-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .login-page form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  background-color: #fff;
-  padding: 50px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-  width: 500px;
+  background: var(--surface);
+  padding: 56px 72px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 540px;
   text-align: center;
+  border: 1px solid var(--border-light);
+  animation: slideUp 0.6s ease-out 0.2s both;
 }
 
-.login-page input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 25px;
-  width: 150%;
-  max-width: 475px;
-  display: block;
-  text-align: left;
-  margin-right: 400px;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 .login-page label {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
   margin-bottom: 8px;
-  width: 75%;
+  color: var(--text-primary);
   text-align: left;
-  margin-right: 400px;
+}
+
+.login-page input {
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-light);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.login-page input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(218, 116, 163, 0.1);
 }
 
 .login-page button[type="submit"] {
-  background-color: #ffa6a6;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #fff;
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 8px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-page button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.login-page button[type="submit"]:hover::before {
+  left: 100%;
 }
 
 .login-page button[type="submit"]:hover {
-  background-color: #ff7f7f;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.login-page button[type="submit"]:active {
+  transform: translateY(0);
 }
 
 .signup-section {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 32px;
+  animation: fadeIn 0.6s ease-out 0.4s both;
 }
 
 .signup-section p {
   font-size: 15px;
-  margin-bottom: 1px;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
 }
 
 .signup-button {
-  background-color: #ffa6a6;
-  color: #fff;
+  background: var(--surface);
+  color: var(--primary);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--primary);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
 }
 
 .signup-button:hover {
-  background-color: #ff7f7f;
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .signup-button:focus {
   outline: none;
+  box-shadow: 0 0 0 3px rgba(218, 116, 163, 0.2);
 }
 
 .title {
-  font-family: "Britney Variable", Arial, sans-serif !important;
-  font-size: 40px;
-  color: #333;
+  font-family: "Britney", sans-serif;
+  font-size: 72px;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .back-to-home {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 30px;
+  left: 30px;
   z-index: 9999;
+  animation: fadeIn 0.6s ease-out 0.5s both;
 }
 
 .back-to-home button {
-  background-color: #ffa6a6;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
   color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
 }
 
 .back-to-home button:hover {
-  background-color: #ff7f7f;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+  
+  .login-page form {
+    padding: 40px 32px;
+    width: 85%;
+  }
+  
+  .back-to-home {
+    bottom: 20px;
+    left: 20px;
+  }
 }

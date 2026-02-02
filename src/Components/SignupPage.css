@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
 @font-face {
   font-family: "Britney";
   src: url("../Fonts/Britney.ttf") format("truetype");
@@ -5,120 +7,240 @@
   font-style: normal;
 }
 
+:root {
+  --primary: #DA74A3;
+  --primary-light: #E9ACC8;
+  --primary-dark: #C95B8D;
+  --secondary: #94B2ED;
+  --accent-yellow: #F4D77A;
+  --accent-orange: #F8B553;
+  --accent-coral: #DAE097;
+  --accent-purple: #6D3A52;
+  --surface: #FFFFFF;
+  --text-primary: #3A2A3E;
+  --text-secondary: #6B7280;
+  --border-light: #E5E7EB;
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #FFF5F8 0%, #F0F4FF 100%);
+}
+
+.signup-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.signup-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: var(--surface);
+  padding: 56px 100px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.signup-page label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.signup-page input,
+.signup-page select {
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-light);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.signup-page select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%231A1A2E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.signup-page input:focus,
+.signup-page select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(218, 116, 163, 0.1);
+}
+
+.signup-page button[type="submit"] {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 8px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-page button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.signup-page button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+.signup-page button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.signup-page button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.signup-section,
+.login-section {
+  text-align: center;
+  margin-top: 32px;
+  animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.signup-section p,
+.login-section p {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.signup-button {
+  background: var(--surface);
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+
+.signup-button:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.signup-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(218, 116, 163, 0.2);
+}
+
+.title {
+  font-family: "Britney", sans-serif;
+  font-size: 72px;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .title {
+    font-size: 48px;
   }
   
   .signup-page form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #fff;
-    padding: 50px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    width: 500px;
-    text-align: center;
+    padding: 40px 40px;
+    width: 85%;
   }
-  
-  .signup-page label {
-    font-size: 16px;
-    margin-bottom: -10px;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .signup-page .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .signup-page select {
-    padding: 10px;
-    font-size: 15px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    background-color: #ffd6d6;
-    font-weight: 500;
-    appearance: none;
-    text-align: center;
-    color: #363636;
-  }
-  
-  .signup-page input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 475px;
-  }
-  
-  .signup-page button[type="submit"] {
-    background-color: #ffa6a6;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  .signup-page button[type="submit"]:hover {
-    background-color: #ff7f7f;
-  }
-  
-  .login-section {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .login-section p {
-    font-size: 15px;
-    margin-bottom: 1px;
-  }
-  
-  .signup-button {
-    background-color: #ffa6a6;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 15px;
-  }
-  
-  .signup-button:hover {
-    background-color: #ff7f7f;
-  }
-  
-  .signup-button:focus {
-    outline: none;
-  }
-  
-  .title {
-    font-size: 40px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 50px;
-    font-family: "Britney Variable", Arial, sans-serif !important;
-  }
+}
