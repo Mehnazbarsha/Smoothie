@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import LoginPage from "./Components/LoginPage";
+import SignupPage from "./Components/SignupPage";
+import HomePage from "./Components/HomePage";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [userLanguage, setUserLanguage] = useState("en");
+
+  const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(userLanguage);
+  }, [userLanguage, i18n]);
+
+  function handleLogin(email, language) {
+    setIsLoggedIn(true);
+    setUsername(email);
+    setUserLanguage(language || "en");
+    navigate("/home");
+  }
+
+  function handleLogout() {
+    setIsLoggedIn(false);
+    setUsername("");
+    setUserLanguage("en");
+    navigate("/");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginPage handleLogin={handleLogin} />} />
+      <Route path="/signup" element={<SignupPage handleLogin={handleLogin} />} />
+      <Route
+        path="/home"
+        element={
+          isLoggedIn ? (
+            <HomePage
+              userLanguage={userLanguage}
+              handleLogout={handleLogout}
+            />
+          ) : (
+            <LoginPage handleLogin={handleLogin} />
+          )
+        }
+      />
+    </Routes>
   );
 }
 
 export default App;
+
