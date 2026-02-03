@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import LoginPage from "./Components/LoginPage";
 import SignupPage from "./Components/SignupPage";
 import HomePage from "./Components/HomePage";
+import AchievementsPage from "./Components/AchievementsPage";
+import ProfilePage from "./Components/ProfilePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,9 +51,16 @@ function App() {
           )
         }
       />
+      <Route
+        path="/achievements"
+        element={isLoggedIn ? <AchievementsPage /> : <LoginPage handleLogin={handleLogin} />}
+      />
+      <Route
+        path="/profile"
+        element={isLoggedIn ? <ProfilePage /> : <LoginPage handleLogin={handleLogin} />}
+      />
     </Routes>
   );
 }
 
 export default App;
-

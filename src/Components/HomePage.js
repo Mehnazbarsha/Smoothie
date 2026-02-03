@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../FirebaseConfig";
 import "./HomePage.css";
 import Lesson1 from "../EnglishLessons/Lesson1";
+import { useNavigate } from "react-router-dom";
 
 import enFlag from "../united-states.png";
 import frFlag from "../france.png";
@@ -28,9 +29,11 @@ import AcheivementIcon from "../Achievement.svg";
 import ProfileIcon from "../Profile.svg";
 import PointsIcon from "../Points.svg";
 import StreakIcon from "../Streak.svg";
+import AddPhotoIcon from "../Addphoto.svg";
 
 function HomePage(props) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState("home");
@@ -45,6 +48,7 @@ function HomePage(props) {
   const [userLevel, setUserLevel] = useState(1);
   const [userXP, setUserXP] = useState(0);
   const [xpToNextLevel, setXpToNextLevel] = useState(1000);
+  const [profileImage, setProfileImage] = useState(null);
 
   // Calculate XP and Level based on completed lessons
   const calculateXPAndLevel = (completedLessonsSet) => {
@@ -150,6 +154,11 @@ function HomePage(props) {
         setUserXP(xpData.currentLevelXP);
         setUserLevel(xpData.level);
         setXpToNextLevel(xpData.xpToNextLevel);
+      }
+
+      const savedProfileImage = localStorage.getItem(`profileImage_${userId}`);
+      if (savedProfileImage) {
+        setProfileImage(savedProfileImage);
       }
     }
   }, [props.userLanguage, i18n]);
@@ -298,6 +307,26 @@ function HomePage(props) {
     if (props.handleLogout) props.handleLogout();
   };
 
+  const handleGoHome = () => setCurrentPage("home");
+
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      setProfileImage(dataUrl);
+
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        localStorage.setItem(`profileImage_${user.uid}`, dataUrl);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const isLessonCompleted = (lessonId) => {
     const lessonKey = `${currentPracticeLanguage}_${lessonId}`;
     return completedLessons.has(lessonKey);
@@ -382,9 +411,21 @@ function HomePage(props) {
           <div className="mint-box">
             <div className="profile-strip">
               <div className="profile-header">
-                <div className="profile-picture">
-                  {userProfile ? getInitials(userProfile.firstName, userProfile.lastName) : "?"}
-                </div>
+                <label className="profile-picture" htmlFor="profileImageInput">
+                  {profileImage ? (
+                    <img src={profileImage} alt="Profile" />
+                  ) : (
+                    <div className="profile-placeholder">
+                      <img src={AddPhotoIcon} alt="Add photo" />
+                    </div>
+                  )}
+                  <input
+                    id="profileImageInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleProfileImageChange}
+                  />
+                </label>
                 <div className="profile-greeting">
                   {userProfile 
                     ? `Hello, ${userProfile.firstName} ${userProfile.lastName}` 
@@ -409,7 +450,7 @@ function HomePage(props) {
                         cy="30"
                         r="25"
                         fill="none"
-                        stroke="#ffa6a6"
+                        stroke="#ff7aa2"
                         strokeWidth="10"
                         strokeDasharray={2 * Math.PI * 25}
                         strokeDashoffset={2 * Math.PI * 25 * (1 - getProgressPercentage() / 100)}
@@ -462,13 +503,23 @@ function HomePage(props) {
           </div>
 
           <div className="icon-row">
-            <div className="icon-item">
+            <div className="icon-item" onClick={handleGoHome} role="button" tabIndex={0}>
               <img src={HomeIcon} alt="Home" className="icon-svg icon-img" />
             </div>
-            <div className="icon-item">
+            <div
+              className="icon-item"
+              onClick={() => navigate("/achievements")}
+              role="button"
+              tabIndex={0}
+            >
               <img src={AcheivementIcon} alt="Achievement" className="icon-svg icon-img" />
             </div>
-            <div className="icon-item">
+            <div
+              className="icon-item"
+              onClick={() => navigate("/profile")}
+              role="button"
+              tabIndex={0}
+            >
               <img src={ProfileIcon} alt="Profile" className="icon-svg icon-img" />
             </div>
           </div>

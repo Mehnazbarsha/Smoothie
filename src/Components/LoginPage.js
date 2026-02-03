@@ -36,36 +36,44 @@ function LoginPage({ handleLogin }) {
   }
 
   return (
-    <div className="login-page">
-      <h1 className="title">Smoothie</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="auth-page">
+      <div className="auth-shell">
+        <div className="auth-card">
+          <div className="brand">
+            <span className="brand-kicker">Welcome Back</span>
+            <h1 className="brand-title">Smoothie</h1>
+            <p className="brand-subtitle">
+              Pick up your language streak and keep your progress flowing.
+            </p>
+          </div>
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button className="primary-button" type="submit">Log In</button>
+          </form>
+          <div className="auth-footer">
+            <span>Don't have an account?</span>
+            <Link className="text-link" to="/signup">Sign up</Link>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Log In</button>
-      </form>
-      <div className="signup-section">
-        <p>Don't have an account? </p>
-        <Link to="/signup">
-          <button className="signup-button">Sign up</button>
-        </Link>
       </div>
     </div>
   );
